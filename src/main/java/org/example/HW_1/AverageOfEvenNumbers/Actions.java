@@ -8,6 +8,7 @@ public class Actions {
     int toNum;
     int listSize;   
     
+    //region Methods
     /**
      * Метод для генерации списка случайных чисел
      * @return
@@ -39,6 +40,7 @@ public class Actions {
 
         return Math.round(average * 100.0) / 100.0;
     }
+    //endregion
 
 }
 
