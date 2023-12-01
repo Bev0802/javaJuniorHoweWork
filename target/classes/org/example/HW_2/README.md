@@ -10,15 +10,12 @@
 
    Вызовите метод "makeSound()" у каждого объекта, если такой метод присутствует.
 
--  Выполнила: 
+- Выполнила: [Task1](https://github.com/Bev0802/javaJuniorHoweWork/tree/main/src/main/java/org/example/HW_2/Task1)
 
-2. **Дополнительная задaча:** 
+2. **Дополнительная задaча:**
 
 Доработайте метод генерации запроса на удаление объекта из таблицы БД "(DELETE FROM Table WHERE ID = '<id>')"
 
 В классе QueryBuilder который мы разработали на семинаре.
 
-* Выполнила:
-
-
- 
+- Выполнила: [Task2](https://github.com/Bev0802/javaJuniorHoweWork/tree/main/src/main/java/org/example/HW_2/Task2)
