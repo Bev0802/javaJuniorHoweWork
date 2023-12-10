@@ -1,5 +1,7 @@
 package org.example.HW_3.Task;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 public class Student implements Serializable {   
@@ -7,6 +9,7 @@ public class Student implements Serializable {
     private String name;
     private int age;
     /* @param gpa - средний балл*/ 
+    @JsonIgnore
     private transient double gpa; // средний балл
     
     public Student(String name, int age, double gpa) {
