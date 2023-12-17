@@ -1,20 +1,18 @@
 {
-  "java.configuration.updateBuildConfiguration": "automatic",
   "sqltools.connections": [
     {
       "mysqlOptions": {
         "authProtocol": "default",
         "enableSsl": "Disabled"
       },
-      "previewLimit": 50,
+      "previewLimit": 300,
       "server": "localhost",
       "port": 3306,
       "driver": "MySQL",
-      "name": "SchoolDB",
+      "name": "@localhost",
       "database": "SchoolDB",
       "username": "root",
       "password": "1982"
     }
-  ],
-  "java.debug.settings.onBuildFailureProceed": true
+  ]
 }
