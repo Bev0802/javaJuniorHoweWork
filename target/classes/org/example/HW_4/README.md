@@ -21,4 +21,4 @@
 
 Класс [Connector](https://github.com/Bev0802/javaJuniorHoweWork/blob/main/src/main/java/org/example/HW_4/Connector.java) для установления соединения с базой данных, используя Hibernate.
 
-В []
+В [HW_BD](https://github.com/Bev0802/javaJuniorHoweWork/blob/main/src/main/java/org/example/hw_bd) реализован Docker контейнер.
