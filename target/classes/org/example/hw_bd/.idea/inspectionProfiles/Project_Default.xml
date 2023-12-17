@@ -1,0 +1,13 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="ComposeMissingKeys" enabled="true" level="TYPO" enabled_by_default="true" />
+    <inspection_tool class="ComposeUnknownKeys" enabled="true" level="TYPO" enabled_by_default="true" />
+    <inspection_tool class="ComposeUnknownValues" enabled="true" level="TYPO" enabled_by_default="true" />
+    <inspection_tool class="ComposeUnquotedPorts" enabled="true" level="TYPO" enabled_by_default="true" />
+    <inspection_tool class="DockerFileAddOrCopySemantic" enabled="true" level="TYPO" enabled_by_default="true" />
+    <inspection_tool class="DockerFileArgumentCount" enabled="true" level="TYPO" enabled_by_default="true" />
+    <inspection_tool class="DockerFileAssignments" enabled="true" level="TYPO" enabled_by_default="true" />
+    <inspection_tool class="DockerFileRunCommandMissingContinuation" enabled="true" level="TYPO" enabled_by_default="true" />
+  </profile>
+</component>

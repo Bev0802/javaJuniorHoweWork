@@ -1,6 +1,6 @@
 package org.example.HW_4;
 
-//import org.example.HW_4.Connector;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -15,6 +15,12 @@ public class DB {
 
     // region Создание базы данных и наполенение данными:
     // JDBC
+    /**
+     * Инициализирует базу данных с использованием JDBC.
+     * Удаляет существующую схему, создает новую и заполняет таблицу курсов начальными данными.
+     *
+     * @throws RuntimeException В случае возникновения ошибок при взаимодействии с базой данных.
+     */
     public static void junit() throws RuntimeException {
 
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
@@ -41,6 +47,10 @@ public class DB {
     }
 
     // Hibernate
+    /**
+     * Наполняет базу данных данными с использованием Hibernate.
+     * Использует объекты Course для добавления записей в таблицу курсов.
+     */
     public static void fillingData() {
         Connector connector = new Connector();
         Session session = connector.getSession();
@@ -67,6 +77,9 @@ public class DB {
     }
     // endregion
 
+    /**
+     * Выводит данные таблицы курсов в виде таблицы в консоль.
+     */
     public static void printTable() {
         Connector connector = new Connector();
         try (Session session = connector.getSession()) {
@@ -88,7 +101,12 @@ public class DB {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Добавляет новую запись в таблицу курсов с указанным заголовком и продолжительностью.
+     *
+     * @param title    Заголовок нового курса.
+     * @param duration Продолжительность нового курса.
+     */
     public static void AddData(String title, int duration) {
         Connector connector = new Connector();
         try (Session session = connector.getSession()) {
@@ -102,9 +120,10 @@ public class DB {
             e.printStackTrace();
         }
     }
-
    
-
+    /**
+    * Заменяет данные курса в таблице на новые данные и выводит измененную таблицу.
+    */
     public static void setTestData() {
         Connector connector = new Connector();
         try (Session session = connector.getSession()) {
@@ -123,7 +142,11 @@ public class DB {
             e.printStackTrace();
         }
     }    
-
+    /**
+     * Выводит данные курса с указанным id в консоль.
+     *
+     * @param id Идентификатор курса для поиска.
+     */
     public static void getById(int id) {
         Connector connector = new Connector();
         try (Session session = connector.getSession()) {
@@ -137,7 +160,11 @@ public class DB {
             e.printStackTrace();
         }
     }
-
+    /*
+     * Выводит данные курса с указанным назаванием в консоль.
+     * 
+     * @param title Название курса для поиска.
+     */
     public static void getByTitle(String title) {
         Connector connector = new Connector();
         try (Session session = connector.getSession()) {
@@ -155,7 +182,12 @@ public class DB {
             e.printStackTrace();
         }
     }
-
+    /*
+     * Фильтрует данные таблицы курсов по длительности в указанных границах.
+     * 
+     * @param minDuration Минимальная длительность курса.
+     * @param maxDuration Максимальная длительность курса.
+    */
     public static void filterByDuration(int minDuration, int maxDuration) {
         Connector connector = new Connector();
         try (Session session = connector.getSession()) {
@@ -218,9 +250,12 @@ public class DB {
             printTable();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        
+        }        
     }
+
+    /*
+     * Удаляет все записи из таблицы курсов.
+    */
      public static void deleteAllData() {
         Connector connector = new Connector();
         try (Session session = connector.getSession()) {
@@ -234,16 +269,17 @@ public class DB {
             e.printStackTrace();
         }
     }
-    
-    //  public static void getAllData() {
-    //     Connector connector = new Connector();
-    //     try (Session session = connector.getSession()) {
-    //         List<Course> books = session.createQuery("FROM Course", Course.class).getResultList();
-    //         books.forEach(System.out::println);
-    //         printTable();
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    // }
+    /*
+     * Выводит данные таблицы курсов в консоль.
+     */
+     public static void getAllData() {
+        Connector connector = new Connector();
+        try (Session session = connector.getSession()) {
+            List<Course> books = session.createQuery("FROM Course", Course.class).getResultList();
+            books.forEach(System.out::println);            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
 }
