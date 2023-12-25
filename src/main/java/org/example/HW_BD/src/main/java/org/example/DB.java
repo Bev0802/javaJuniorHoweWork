@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.List;
 
 public class DB {
-    private static final String URL = "jdbc:mysql://schoolDB:3306/";
+    private static final String URL = "jdbc:mysql://SchoolDB:3306/";
     private static final String USER = "root";
     private static final String PASSWORD = "1982";
 
@@ -25,11 +25,14 @@ public class DB {
 
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
             Statement stmt = con.createStatement();
-            stmt.execute("DROP SCHEMA  SchoolDB;"); // удаляем схему
-            stmt.execute("CREATE SCHEMA SchoolDB;"); // создаем схему
+            //stmt.execute("DROP SCHEMA  SchoolDB;"); // удаляем схему
+            stmt.execute("DROP SCHEMA  IF EXISTS SchoolDB;"); // удаляем схему, если существует
+            stmt.execute("CREATE SCHEMA IF NOT EXISTS SchoolDB;"); // создаем схему, если еще не существует
+            stmt.execute("USE SchoolDB;"); // используем созданную схему
+            stmt.execute("DROP TABLE  IF EXISTS SchoolDB.Courses;"); // удаляем таблицу, если существует
             stmt.execute(
-                    "CREATE TABLE  SchoolDB.Courses(id INT NOT NULL AUTO_INCREMENT, title VARCHAR(45) NULL, duration INT NULL, PRIMARY KEY (id));"); // создаем
-            // таблицу
+                "CREATE TABLE IF NOT EXISTS SchoolDB.Courses(id INT NOT NULL AUTO_INCREMENT, title VARCHAR(45) NULL, duration INT NULL, PRIMARY KEY (id));"); // создаем таблицу, если еще не существует
+            // заполняем таблицу начальными данными
             // заполняем таблицу начальными данными
             stmt.execute("INSERT INTO SchoolDB.Courses(id, title, duration) VALUES(id,'Алгебра', 100);");
             stmt.execute("INSERT INTO SchoolDB.Courses(id, title, duration) VALUES(id, 'Геометрия', 50);");

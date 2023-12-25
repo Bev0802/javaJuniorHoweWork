@@ -19,6 +19,6 @@ public class Main {
         DB.deleteData(5); 
         DB.deleteData("Английский язык");
 
-        DB.deleteAllData(); // удаляет все данные из таблицы
+       //DB.deleteAllData(); // удаляет все данные из таблицы
     }
 }

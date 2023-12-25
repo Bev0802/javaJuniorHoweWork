@@ -9,9 +9,9 @@ services:
             dockerfile: Dockerfile
     schoolDB:
         image: mysql:latest
-        container_name: schoolDB.db
+        container_name: SchoolDB.db
         environment:
-            MYSQL_ROOT_PASSWORD: root
+            MYSQL_ROOT_PASSWORD: 1982
             MYSQL_DATABASE: SchoolDB
         volumes:
             -   ./.containers/database:/var/lib/mysql
