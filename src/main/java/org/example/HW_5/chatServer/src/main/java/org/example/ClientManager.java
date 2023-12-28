@@ -78,7 +78,7 @@ public class ClientManager implements Runnable {
         for (ClientManager client : clients) {
             try {
                 if (client.name.equals(nameReceiver)) {
-                    client.bufferedWriter.write("Личное сообщение от " + nameReceiver + message);
+                    client.bufferedWriter.write("Личное сообщение от " + name + ": " + message);
                     client.bufferedWriter.newLine();
                     client.bufferedWriter.flush();
                     // Информируем отправителя о том, что личное сообщение отправлено

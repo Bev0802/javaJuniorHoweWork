@@ -58,7 +58,7 @@ public class Client {
 
             Scanner scanner = new Scanner(System.in);
             while (socket.isConnected()) {
-                System.out.print("Введите получателя или 'всем' и сообщение для него через пробел: ");
+                System.out.println("Введите получателя или 'всем' и сообщение для него через пробел: ");
                 String message = scanner.nextLine();
                 bufferedWriter.write(name + ": " + message);
                 bufferedWriter.newLine();
