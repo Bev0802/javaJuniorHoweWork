@@ -11,7 +11,7 @@ public class Client {
     private BufferedWriter bufferedWriter;
     private BufferedReader bufferedReader;
 
-    public Client(Socket socket, String userName) {
+    public Client(Socket socket, String userName){
         this.socket = socket;
         name = userName;
         try
@@ -33,13 +33,11 @@ public class Client {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String nameRecipient;
                 String message;
                 while (socket.isConnected()){
                     try {
-                        nameRecipient = bufferedReader.readLine();
                         message = bufferedReader.readLine();
-                        System.out.println(nameRecipient + ": " + message);
+                        System.out.println(message);
                     }
                     catch (IOException e){
                         closeEverything(socket, bufferedReader, bufferedWriter);
@@ -52,30 +50,21 @@ public class Client {
     /**
      * Отправить сообщение
      */
-    public void sendMessage() {
+    public void sendMessage(){
         try {
             bufferedWriter.write(name);
             bufferedWriter.newLine();
             bufferedWriter.flush();
 
-            // Ожидаем ввод сообщения
+            Scanner scanner = new Scanner(System.in);
             while (socket.isConnected()) {
-                // Отправляем запрос на выбор получателя
-                System.out.println("Выберите получателя (введите 'всем' или имя пользователя): ");
-                String nameRecipient = new Scanner(System.in).nextLine();
-
-                // Отправляем получателя серверу
-                bufferedWriter.write(nameRecipient);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
-
-                System.out.println("Введите сообщение: ");
-                String message = new Scanner(System.in).nextLine();
+                System.out.print("Введите получателя или 'всем' и сообщение для него через пробел: ");
+                String message = scanner.nextLine();
                 bufferedWriter.write(name + ": " + message);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
             }
-        } catch (IOException e) {
+        } catch (IOException e){
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
     }
@@ -96,5 +85,6 @@ public class Client {
             e.printStackTrace();
         }
     }
+
 
 }

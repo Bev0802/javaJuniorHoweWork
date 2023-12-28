@@ -21,64 +21,64 @@ public class ClientManager implements Runnable {
             name = bufferedReader.readLine();
             clients.add(this);
             System.out.println(name + " подключился к чату.");
-            sentAllMessage("Server: " + name + " в сети.");
-        }
-        catch (IOException e){
+            sentAllMessage("Server: " + name + " подключился к чату.");
+        } catch (IOException e) {
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
+
     }
 
     @Override
     public void run() {
-        String nameReceiver;
         String massageFromClient;
 
         while (socket.isConnected()) {
             try {
-                nameReceiver = bufferedReader.readLine();
                 massageFromClient = bufferedReader.readLine();
-                broadcastMessage(nameReceiver, massageFromClient);
-            }
-            catch (IOException e){
+
+                broadcastMessage(massageFromClient);
+            } catch (IOException e) {
                 closeEverything(socket, bufferedReader, bufferedWriter);
                 break;
             }
         }
     }
 
-
-    //если nameReceiver == всем, то отправить всем, а если там другое найти и отправить только этому пользователю.
-    private void broadcastMessage(String nameReceiver, String message){
-        if (nameReceiver.equals("всем")){
-            sentAllMessage(message);
-        }
-        else {
-            sendPrivateMessage(nameReceiver, message);
+    // если nameReceiver == всем, то отправить всем, а если там другое найти и
+    // отправить только этому пользователю.
+    private void broadcastMessage(String message) {
+        String[] temp = message.split(" ", 3);
+        if (temp.length == 3) {
+            String nameReceiver = temp[1];
+            String privateMessage = temp[2];
+            if (nameReceiver.equals("всем")) {
+                sentAllMessage(privateMessage);
+            } else {
+                sendPrivateMessage(nameReceiver, privateMessage);
+            }
         }
     }
 
     // Отправка сообщений всем пользователям
-    private void sentAllMessage(String message){
-        for (ClientManager client: clients) {
+    private void sentAllMessage(String message) {
+        for (ClientManager client : clients) {
             try {
                 if (!client.name.equals(name)) {
                     client.bufferedWriter.write(message);
                     client.bufferedWriter.newLine();
                     client.bufferedWriter.flush();
                 }
-            }
-            catch (IOException e){
+            } catch (IOException e) {
                 closeEverything(socket, bufferedReader, bufferedWriter);
             }
         }
     }
 
-    // личные сообщения
-    private void sendPrivateMessage(String nameReceiver , String message) {
+    private void sendPrivateMessage(String nameReceiver, String message) {
         for (ClientManager client : clients) {
             try {
-                if (!client.name.equals(nameReceiver)) {
-                    client.bufferedWriter.write("Личное сообщение от " +  message);
+                if (client.name.equals(nameReceiver)) {
+                    client.bufferedWriter.write("Личное сообщение от " + nameReceiver + message);
                     client.bufferedWriter.newLine();
                     client.bufferedWriter.flush();
                     // Информируем отправителя о том, что личное сообщение отправлено
@@ -101,7 +101,6 @@ public class ClientManager implements Runnable {
         }
     }
 
-
     private void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
         // Удаление клиента из коллекции
         removeClient();
@@ -123,7 +122,7 @@ public class ClientManager implements Runnable {
         }
     }
 
-    private void removeClient(){
+    private void removeClient() {
         clients.remove(this);
         System.out.println(name + " покинул чат.");
         sentAllMessage("Server: " + name + " покинул чат.");

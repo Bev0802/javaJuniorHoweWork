@@ -3,36 +3,34 @@ package org.example;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
+import java.rmi.UnknownHostException;
 import java.util.Scanner;
 
-
 public class Main {
+
     public static void main(String[] args) {
-        System.out.println("Start Client ...");
-        
         try {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Введите своё имя: ");
+            System.out.print("Введите своё имя: ");
+            // Укажем свое имя
             String name = scanner.nextLine();
-
-            Socket socket = new Socket("localhost", 1300);
+            Socket socket = new Socket("localhost", 1600);
             Client client = new Client(socket, name);
-
             InetAddress inetAddress = socket.getInetAddress();
-            System.out.println("IP адрес: " + inetAddress);
+            System.out.println("InetAddress: " + inetAddress);
             String remoteIp = inetAddress.getHostAddress();
-            System.out.println("Удаленный IP адрес: " + remoteIp);
-            System.out.println("LocalPort: " + socket.getLocalPort());
+            System.out.println("Remote IP: " + remoteIp);
+            System.out.println("LocalPort:" + socket.getLocalPort());
 
             client.listenForMessage();
-            client.sendMessage();            
-
-        }catch (UnknownHostException e){
-             e.printStackTrace();
-        }catch (IOException e){
+            client.sendMessage();
+        }
+        catch (UnknownHostException e){
             e.printStackTrace();
         }
-        
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
+
 }
